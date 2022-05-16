@@ -3,37 +3,59 @@ package com.game.controller;
 import java.util.List;
 
 import com.game.model.Game;
+import com.game.model.User;
 import com.game.service.GameService;
 import com.game.view.GameView;
+import com.game.view.MenuView;
+
 
 public class GameController {
 	private final GameView gameView;
 	private final GameService gameService;
-
+	private final MenuView menuview;
 	private List<Game> games;
+	private User user;
 
 	public GameController() {
 		this.gameView = new GameView();
 		this.gameService = new GameService();
+		this.menuview = new MenuView();
+		this.user= new User();
 		
 	}
 	public void gameMenu() {
 		gameView.gameMenu();
-		if(gameView.getNumberChoice() == 1) {
-			playGame();
-    	}else if(gameView.getNumberChoice() == 2) {
-    		showRank();
-    		
-    	}
+		chooseNumber();
 	}
 
 	public void playGame(){
 		gameView.playGame();
+		gameView.playingMenu();
+		if(gameView.getNumberChoice() == 1) {
+			showRank();
+    	}else if(gameView.getNumberChoice() == 2) {
+    		logout();
+    	}
     }
 	public void showRank() {
 		games = gameService.showRank();
 		games = gameService.calRank(games);
 		gameView.calRank(games);
+		
+	}
+	public void logout() {
+		menuview.logout();
+		user.setIs_login(false);
+		
+	}
+	public void chooseNumber() {
+		if(gameView.getNumberChoice() == 1) {
+			playGame();
+    	}else if(gameView.getNumberChoice() == 2) {
+    		showRank();
+    	}else if(gameView.getNumberChoice() == 3) {
+    		logout();
+    	}
 	}
 	
 }

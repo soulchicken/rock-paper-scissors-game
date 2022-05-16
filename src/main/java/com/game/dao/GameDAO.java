@@ -18,6 +18,7 @@ public class GameDAO {
 	private ResultSet resultSet;
 	private Game game;
 	private List<Game> games = new ArrayList<>();
+	private List<Game> calGames = new ArrayList<>();
 	private List<Game> oddsRate = new ArrayList<>();
 	private float calOdds;
 	public List<Game> showRank() {
@@ -52,20 +53,15 @@ public class GameDAO {
 	}
 	public List<Game> calculateRank(List<Game> games){
 		for (Game game : games) {
-			calOdds = (float) (game.getWin() * 100 / game.getTotalgames());
+			calOdds = (float) (game.getWin() * 100 /game.getTotalgames());
 			game.setOdds(calOdds);
 			game = new Game(game.getUser_id(),game.getOdds());
 			oddsRate.add(game);
 		}
-		Game dumy = new Game();
-		
-		for(int i=0;i<games.size()-1;i++) {
-			for(int j=i+1;j<games.size();j++) {
-				if(oddsRate.get(i).getOdds() <= oddsRate.get(j).getOdds()) {
-					dumy = oddsRate.get(i);
-					oddsRate.set(i, oddsRate.get(j));
-					oddsRate.set(j, dumy);
-				}
+		calGames.add(oddsRate.get(0));
+		for(int i=0;i<games.size();i++) {
+			for(int j=1;j<games.size();j++) {
+				if(oddsRate.get(i).getOdds() <= oddsRate.get(j).getOdds());
 			}
 		}
 

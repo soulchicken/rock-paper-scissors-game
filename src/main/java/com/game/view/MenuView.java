@@ -50,4 +50,8 @@ public class MenuView {
     	System.out.println(">>회원가입에 실패하였습니다.");
     	System.out.println(">>아이디와 비밀번호를 다시 입력해주세요");
     }
+	public void logout() {
+		System.out.println(">>로그아웃 되었습니다");
+	}
+
 }
