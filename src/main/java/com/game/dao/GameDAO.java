@@ -29,7 +29,7 @@ public class GameDAO {
 	 * @return DML (INSERT)
 	 * @throws SQLException
 	 */
-	private PreparedStatement createPreparedStatement(Connection connection, String squeryql, String userId, String password) throws SQLException {
+	private PreparedStatement createPreparedStatement(Connection connection, String query, String userId, String password) throws SQLException {
 		preparedStatement = connection.prepareStatement(query); // query 전달 객체
 		preparedStatement.setString(1, userId);  
 		preparedStatement.setString(2, password); 
