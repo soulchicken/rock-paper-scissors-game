@@ -10,14 +10,15 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-    private String id;
+    private String userName;
+    private int userId;
     private String password;
     private Boolean is_login;
 
     @Override
     public String toString() {
         return "User{" +
-                "id='" + id + '\'' +
+                "id='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", is_login=" + is_login +
                 '}';
