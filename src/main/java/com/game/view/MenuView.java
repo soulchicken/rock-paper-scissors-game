@@ -1,9 +1,11 @@
 package com.game.view;
 
 import com.game.model.User;
+import lombok.Getter;
 
 import java.util.Scanner;
 
+@Getter
 public class MenuView {
     private Scanner sc;
     private final User user;
@@ -15,9 +17,6 @@ public class MenuView {
     }
     public int getNumberChoice() {
 		return numberChoice;
-	}
-	public void setNumberChoice(int numberChoice) {
-		this.numberChoice = numberChoice;
 	}
 	public void mainPage() {
     	System.out.println(">>1.로그인 2.회원가입");
