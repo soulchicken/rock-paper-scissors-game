@@ -9,6 +9,7 @@ public class App {
 
 //		todoController.save(todo);
 //		System.out.println("\n\n---------ºº¿Ã∫Í »Æ¿Œ");
+		gameController.joinUser();
 		gameController.save(2,"±Ë±Ë±Ë","1234",0);
 	}
 

@@ -1,5 +1,7 @@
 package com.game.controller;
 
+import java.util.Scanner;
+
 import com.game.service.GameService;
 import com.game.view.GameView;
 
@@ -8,8 +10,8 @@ public class GameController {
 	private final GameService gameService;
 	private final GameView gameView;
 	private Exception errorObject;
+	Scanner sc = new Scanner(System.in);
 
-	
 	public GameController() {
 		this.gameService = new GameService();
 		this.gameView = new GameView();
@@ -25,6 +27,13 @@ public class GameController {
 			errorObject = new Exception("Database 등록 실패");
 			gameView.errorPage(errorObject);
 		}
+	}
+
+	public void joinUser() {
+		gameView.joinUserInputName();
+		String name;
+		gameView.joinUserInputPassword();
+		String password;
 	}
 
 }

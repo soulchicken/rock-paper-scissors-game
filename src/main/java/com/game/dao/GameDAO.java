@@ -34,7 +34,6 @@ public class GameDAO {
 		return affectedRows;
 	}
 
-
 	private PreparedStatement createPrepaeredStatement(Connection connection, String sql, int userId,
 			String userName, String password, int isLogin) throws SQLException {
 		
@@ -46,5 +45,31 @@ public class GameDAO {
 		
 		return preparedStatement;
 	}
+	
+	public boolean checkUserExistence(String sql, String id) {
+		boolean result = false;
+		try (
+				// java와 MySQL의 연결통로 (Connection) 생성
+				Connection connection = DBUtils.getConnection();
+				// 통로를 통해 SQL을 전달할 객체 Statement 생성
+				PreparedStatement preparedStatement = createPrepaeredStatement(connection, sql, id);
+				// 실제 쿼리 전달 및 수행 (진행 시켜)
+			)
+		{
+			result = preparedStatement.execute();
+			if (result) {
+				// 아이디가 있어요!
+				
+			} 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
+	private PreparedStatement createPrepaeredStatement(Connection connection, String sql, String id) throws SQLException {
+		PreparedStatement preparedStatement = connection.prepareStatement(sql);
+		preparedStatement.setString(1, id);
+		return preparedStatement;
+	}
 }
