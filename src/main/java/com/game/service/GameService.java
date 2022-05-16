@@ -14,5 +14,8 @@ public class GameService {
 	public List<Game> showRank() {
 		return gameDAO.showRank();
 	}
+	public List<Game> calRank(List<Game> games){
+		return gameDAO.calculateRank(games);
+	}
 
 }

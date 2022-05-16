@@ -12,6 +12,7 @@ import lombok.Setter;
 public class GameView {
 	private Scanner sc;
 	private int numberChoice;
+	private int rate =1;
 	public GameView() {
 		this.sc = new Scanner(System.in);
 	}
@@ -28,8 +29,21 @@ public class GameView {
     public void ShowRankPage(List<Game> games) {
     	System.out.println("전체 랭킹");
     	for (Game game : games) {
-			System.out.println(String.format("아이디 %d, win %d, lose %d, draw %d ", game.getUser_id(),game.getWin(),game.getLose(), game.getDraw()));
+    		
+			System.out.println(String.format("아이디 %d, win %d, lose %d, draw %d total %d", 
+					game.getUser_id(),game.getWin(),game.getLose(), game.getDraw(), game.getTotalgames()));
 			System.out.println();
 		}
     }
+	public void calRank(List<Game> games) {
+
+		System.out.println("|----------순위----------|");
+    	for (Game game : games) {
+ 
+			System.out.println(String.format("%d등 아이디 %d, odds %.0f 퍼센트" , 
+					rate,game.getUser_id(),game.getOdds()));
+			rate ++;
+			System.out.println();
+		}
+	}
 }

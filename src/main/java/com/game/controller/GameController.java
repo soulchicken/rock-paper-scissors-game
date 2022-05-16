@@ -6,8 +6,6 @@ import com.game.model.Game;
 import com.game.service.GameService;
 import com.game.view.GameView;
 
-
-
 public class GameController {
 	private final GameView gameView;
 	private final GameService gameService;
@@ -25,6 +23,7 @@ public class GameController {
 			playGame();
     	}else if(gameView.getNumberChoice() == 2) {
     		showRank();
+    		
     	}
 	}
 
@@ -33,6 +32,8 @@ public class GameController {
     }
 	public void showRank() {
 		games = gameService.showRank();
-		gameView.ShowRankPage(games);
+		games = gameService.calRank(games);
+		gameView.calRank(games);
 	}
+	
 }
