@@ -4,10 +4,7 @@ import java.sql.Connection;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
-
 import java.sql.PreparedStatement;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -16,7 +13,7 @@ import com.game.utils.DBUtils;
 
 public class GameDAO {
 
-	//kim
+
 	public int saveUser(int userId, String userName, String password, int isLogin) {
 		final String insertQuery = "INSERT INTO user (user_name, password, is_login) VALUES (?,?,?)";
 		int affectedRows = 0;

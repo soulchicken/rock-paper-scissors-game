@@ -1,6 +1,5 @@
 package com.game;
 
-import com.game.controller.GameController;
 import com.game.controller.MenuController;
 
 
