@@ -6,11 +6,11 @@ import com.game.view.MenuView;
 public class MenuController {
     private final MenuView menuView;
     private final User user;
-    private final GameController gameController;
+    private final RankController rankController;
     public MenuController(){
         this.menuView = new MenuView();
         this.user = new User();
-        this.gameController = new GameController();
+        this.rankController = new RankController();
        
     }
     public void main() {
@@ -30,7 +30,7 @@ public class MenuController {
         	menuView.loginSuccess();
         	user.setIs_login(true);
         	//게임 컨트롤러로 이동
-        	gameController.gameMenu();
+            rankController.gameMenu();
         	
         }else {
         	menuView.loginError();

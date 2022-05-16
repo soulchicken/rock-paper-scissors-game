@@ -1,22 +1,25 @@
 package com.game.service;
 
-import java.util.List;
 import com.game.dao.GameDAO;
-import com.game.model.Game;
+
 
 public class GameService {
 	private final GameDAO gameDAO;
+	
 	public GameService() {
 		this.gameDAO = new GameDAO();
 	}
+	
+	public int save(int userId, String userName, String password, int isLogin) {
+		int result = gameDAO.saveUser(userId, userName, password, isLogin);
+		gameDAO.saveScore(userName);
+		return result;
+	}
 
-	public List<Game> showRank() {
-		return gameDAO.showRank();
-	}
-  
-	public List<Game> calRank(List<Game> games){
-		return gameDAO.calculateRank(games);
-	}
+	public boolean joinUserInputName(String name) {
+		return gameDAO.checkUserId(name);
+  }
+
   
   	public int login(String userId, String password) {
 		// TODO Auto-generated method stub
@@ -26,5 +29,5 @@ public class GameService {
 	public int logout(String userId, String password) {
 		// TODO Auto-generated method stub
 		return gameDAO.logout(userId, password);
-
+	}
 }
