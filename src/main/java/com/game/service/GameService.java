@@ -10,8 +10,9 @@ public class GameService {
 	}
 	
 	public int save(int userId, String userName, String password, int isLogin) {
-		// TODO Auto-generated method stub
-		return gameDAO.save(userId, userName, password, isLogin);
+		int result = gameDAO.saveUser(userId, userName, password, isLogin);
+		gameDAO.saveScore(userName);
+		return result;
 	}
 
 	public boolean joinUserInputName(String name) {

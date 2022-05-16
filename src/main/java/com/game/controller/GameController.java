@@ -22,10 +22,11 @@ public class GameController {
 		while (true) {
 			gameView.joinUserInputName();
 			name = sc.next();
+			System.out.println("입력한 이름은 "+name +" 입니다.");
 			if (gameService.joinUserInputName(name)) {
-				break;
-			} else {
 				gameView.reInput();
+			} else {
+				break;
 			}
 		}
 		gameView.joinUserInputPassword();
