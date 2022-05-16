@@ -76,6 +76,8 @@ public void successPage() {
 		System.out.println("중복된 값입니다. 다시 입력해주세요.");
 	}
 
-	
 
+	public void logout(String s) {
+		System.out.println(s);
+	}
 }
