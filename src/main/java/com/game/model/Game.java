@@ -1,19 +1,32 @@
 package com.game.model;
 
-import lombok.AccessLevel;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.Setter;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED) // 무분별한 인스턴스 생성 방지
-@AllArgsConstructor
+@Setter
 @Getter
-@ToString
-@lombok.Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Game {
-	private String userId;
-	private String password;
-	private Boolean isLogin;
-
+	int user_id;
+	int win;
+	int lose;
+	int draw;
+	int totalgames = win +  lose + draw;
+	float odds;
+	
+	public Game(int user_id, int win, int lose, int draw, int totalgames) {
+		this.user_id = user_id;
+		this.win = win;
+		this.lose = lose;
+		this.draw = draw;
+		this.totalgames = totalgames;
+	}
+	public Game(int user_id,float odds) {
+		this.user_id = user_id;
+		this.odds = odds;
+	}
 }
