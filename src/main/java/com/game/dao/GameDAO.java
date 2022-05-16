@@ -188,7 +188,7 @@ public class GameDAO {
 		return result;
 	}
 
-	private int findUserIdNyName(String userName) {
+	public int findUserIdNyName(String userName) {
 		String findUserIdQuery = "SELECT user_id FROM user WHERE user_name = ?";
 		int id = 0;
 

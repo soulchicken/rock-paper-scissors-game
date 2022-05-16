@@ -28,11 +28,11 @@ public class GameController {
 	 * @param userId
 	 * @param password
 	 */
-	public void login(String userId, String password) {
+	public void login(String userName, String password) {
 		// TODO Auto-generated method stub
-		if (gameService.login(userId, password) != 0) {
+		if (gameService.login(userName, password) != 0) {
 			gameView.login("로그인되었습니다. ");
-			rankController.gameMenu();
+			rankController.gameMenu(userName);
 		}
 		else {
 			gameView.login("없는 회원정보입니다.");
