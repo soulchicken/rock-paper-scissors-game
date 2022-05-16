@@ -30,7 +30,7 @@ public class MenuController {
         	menuView.loginSuccess();
         	user.setIs_login(true);
         	//게임 컨트롤러로 이동
-        	gameController.playGame();
+        	gameController.gameMenu();
         	
         }else {
         	menuView.loginError();

@@ -10,6 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Game {
+	int user_id;
     int win;
     int lose;
     int draw;
