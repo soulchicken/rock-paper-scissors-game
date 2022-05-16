@@ -23,10 +23,20 @@ public class GameService {
   	public List<Game> showRank() {
 		return gameDAO.showRank();
 	}
+  
 	public List<Game> calRank(List<Game> games){
 		return gameDAO.calculateRank(games);
 
 	}
+  
+  	public int login(String userId, String password) {
+		// TODO Auto-generated method stub
+		return gameDAO.login(userId, password);
+	}
+
+	public int logout(String userId, String password) {
+		// TODO Auto-generated method stub
+		return gameDAO.logout(userId, password);
 
 
 }

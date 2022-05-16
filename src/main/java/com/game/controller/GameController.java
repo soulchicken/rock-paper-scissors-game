@@ -1,7 +1,11 @@
 package com.game.controller;
 
+import com.game.model.Game;
+import com.game.model.User;
+
 import java.util.List;
 import java.util.Scanner;
+
 
 import com.game.service.GameService;
 import com.game.view.GameView;
@@ -9,15 +13,17 @@ import com.game.model.Game;
 import com.game.model.User;
 import com.game.view.MenuView;
 
-
 public class GameController {
 	private final GameView gameView;
 	private final GameService gameService;
 	private final MenuView menuview;
 	private List<Game> games;
 	private User user;
+
+
   private Exception errorObject;
 	Scanner sc = new Scanner(System.in);
+
 
 	public GameController() {
 		this.gameView = new GameView();
@@ -30,6 +36,38 @@ public class GameController {
 		gameView.gameMenu();
 		chooseNumber();
 	}
+	/**
+	 * 로그인 메서드
+	 * @param userId
+	 * @param password
+	 */
+	public void login(String userId, String password) {
+		// TODO Auto-generated method stub
+		if (gameService.login(userId, password) != 0) {
+			gameView.login("로그인되었습니다. ");
+		}
+		else {
+			gameView.login("없는 회원정보입니다.");
+		}
+	}
+
+	/** 
+	 * 로그아웃 메서드
+	 * @param userId
+	 * @param password
+	 */
+	public void logout(String userId, String password) {
+		// TODO Auto-generated method stub
+		if (gameService.logout(userId, password) != 0) {
+			gameView.logout("로그아웃되었습니다.");
+		}
+		else {
+			gameView.logout("잠시 후 다시 로그아웃해주세요");
+		}
+
+	}
+
+
   	public void playGame(){
 		gameView.playGame();
 		gameView.playingMenu();
@@ -59,7 +97,7 @@ public class GameController {
     		logout();
     	}
 	}
-public void joinUser() {
+    public void joinUser() {
 		String name;
 		while (true) {
 			gameView.joinUserInputName();
@@ -87,4 +125,7 @@ public void joinUser() {
 			gameView.errorPage(errorObject);
 		}
 	}
+
+
 }
+
