@@ -1,8 +1,6 @@
 package com.game.controller;
 
 import com.game.model.Game;
-import com.game.model.User;
-
 import java.util.List;
 
 
@@ -16,27 +14,28 @@ public class RankController {
     private final RankService rankService;
     private final MenuView menuview;
     private List<Game> games;
-    private User user;
+    
 
     public RankController() {
         this.rankView = new RankView();
         this.rankService = new RankService();
         this.menuview = new MenuView();
-        this.user = new User();
+        
+        
 
     }
 
-    public void gameMenu() {
+    public void gameMenu(String userName, String password) {
         rankView.gameMenu();
-        chooseNumber();
+        chooseNumber(userName, password);
     }
-    public void playGame(){
+    public void playGame(String userName, String password){
         rankView.playGame();
         rankView.playingMenu();
         if(rankView.getNumberChoice() == 1) {
             showRank();
         }else if(rankView.getNumberChoice() == 2) {
-            logout();
+            logout(userName, password);
         }
     }
     public void showRank() {
@@ -45,18 +44,20 @@ public class RankController {
         rankView.calRank(games);
 
     }
-    public void logout() {
+    public void logout(String userName, String password) {
+//        user.setIs_login(false);
+//        gameController.logout(user.getId(), user.getPassword());
+    		rankService.logout(userName, password);
         menuview.logout();
-        user.setIs_login(false);
 
     }
-    public void chooseNumber() {
+    public void chooseNumber(String userName, String password) {
         if(rankView.getNumberChoice() == 1) {
-            playGame();
+            playGame(userName, password);
         }else if(rankView.getNumberChoice() == 2) {
             showRank();
         }else if(rankView.getNumberChoice() == 3) {
-            logout();
+            logout(userName, password);
         }
     }
 }
