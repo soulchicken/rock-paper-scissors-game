@@ -41,7 +41,8 @@ public class GameView {
 		}
     }
 	public void calRank(List<Game> games) {
-		System.out.println("|----------순위----------|");
+    	System.out.println("|----------순위----------|");
+
     	for (Game game : games) {
 			System.out.println(String.format("%d등 아이디 %d, odds %.0f 퍼센트" , 
 					rate,game.getUser_id(),game.getOdds()));
@@ -49,12 +50,32 @@ public class GameView {
 			System.out.println();
 		}
 	}
-  
+
   public void login(String string) {
 		System.out.println(string);
 	}
 
-	public void logout(String string) {
-		System.out.println(string);
+
+public void successPage() {
+		System.out.println("정상 등록되었습니다.");
 	}
+
+	public void errorPage(Exception errorObject) {
+		System.out.println("문제가 발생하였습니다. "+ errorObject.getMessage());
+	}
+
+	public void joinUserInputName() {
+		System.out.println("유저 이름을 입력해주세요.");
+	}
+
+	public void joinUserInputPassword() {
+		System.out.println("비밀번호을 입력해주세요.");
+	}
+
+	public void reInput() {
+		System.out.println("중복된 값입니다. 다시 입력해주세요.");
+	}
+
+	
+
 }
