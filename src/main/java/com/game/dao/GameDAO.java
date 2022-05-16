@@ -1,30 +1,89 @@
 package com.game.dao;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
+
+import com.game.model.User;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.game.model.User;
+import com.game.model.Game;
 import com.game.utils.DBUtils;
+
 
 public class GameDAO {
 	private Connection connection;
 	private Statement statement;
 	private ResultSet resultSet;
-	private PreparedStatement preparedStatement;
+
+	private Game game;
+	private List<Game> games = new ArrayList<>();
+	private List<Game> calGames = new ArrayList<>();
+	private List<Game> oddsRate = new ArrayList<>();
+	private float calOdds;
+	public List<Game> showRank() {
+		final String selectQuery = "SELECT * FROM score";
+		try {
+			connection = DBUtils.getConnection();
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(selectQuery);
+			
+			while(resultSet.next()) {
+				int user_id = resultSet.getInt("user_id");
+				int win = resultSet.getInt("win");
+				int lose = resultSet.getInt("lose");
+				int draw = resultSet.getInt("draw");
+				int totalgames = win + lose + draw;
+				game = new Game(user_id, win, lose, draw, totalgames);
+				games.add(game);
+			
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				resultSet.close();
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return games;
+	}
+	public List<Game> calculateRank(List<Game> games){
+		for (Game game : games) {
+			calOdds = (float) (game.getWin() * 100 /game.getTotalgames());
+			game.setOdds(calOdds);
+			game = new Game(game.getUser_id(),game.getOdds());
+			oddsRate.add(game);
+		}
+		calGames.add(oddsRate.get(0));
+		for(int i=0;i<games.size();i++) {
+			for(int j=1;j<games.size();j++) {
+				if(oddsRate.get(i).getOdds() <= oddsRate.get(j).getOdds());
+			}
+		}
 
 	
+		return oddsRate;
+
+	}
+
 	public int saveUser(int userId, String userName, String password, int isLogin) {
 		final String insertQuery = "INSERT INTO user (user_name, password, is_login) VALUES (?,?,?)";
 		int affectedRows = 0;
 		try (
-				// java¿Í MySQLÀÇ ¿¬°áÅë·Î (Connection) »ý¼º
+				// javaì™€ MySQLì˜ ì—°ê²°í†µë¡œ (Connection) ìƒì„±
 				Connection connection = DBUtils.getConnection();
-				// Åë·Î¸¦ ÅëÇØ SQLÀ» Àü´ÞÇÒ °´Ã¼ Statement »ý¼º
+				// í†µë¡œë¥¼ í†µí•´ SQLì„ ì „ë‹¬í•  ê°ì²´ Statement ìƒì„±
 				PreparedStatement preparedStatement = createPrepaeredStatement(connection, insertQuery, userId, userName, password, isLogin);
-				// ½ÇÁ¦ Äõ¸® Àü´Þ ¹× ¼öÇà (ÁøÇà ½ÃÄÑ)
+				// ì‹¤ì œ ì¿¼ë¦¬ ì „ë‹¬ ë° ìˆ˜í–‰ (ì§„í–‰ ì‹œì¼œ)
 			)
 		{
 			affectedRows = preparedStatement.executeUpdate();
@@ -49,11 +108,11 @@ public class GameDAO {
 	public boolean checkUserExistence(String sql, String id) {
 		boolean result = false;
 		try (
-				// java¿Í MySQLÀÇ ¿¬°áÅë·Î (Connection) »ý¼º
+				// javaì™€ MySQLì˜ ì—°ê²°í†µë¡œ (Connection) ìƒì„±
 				Connection connection = DBUtils.getConnection();
-				// Åë·Î¸¦ ÅëÇØ SQLÀ» Àü´ÞÇÒ °´Ã¼ Statement »ý¼º
+				// í†µë¡œë¥¼ í†µí•´ SQLì„ ì „ë‹¬í•  ê°ì²´ Statement ìƒì„±
 				PreparedStatement preparedStatement = createPrepaeredStatement(connection, sql, id);
-				// ½ÇÁ¦ Äõ¸® Àü´Þ ¹× ¼öÇà (ÁøÇà ½ÃÄÑ)
+				// ì‹¤ì œ ì¿¼ë¦¬ ì „ë‹¬ ë° ìˆ˜í–‰ (ì§„í–‰ ì‹œì¼œ)
 			)
 		{
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -76,7 +135,7 @@ public class GameDAO {
 
 	public boolean checkUserId(String name) {
 		final String checkIdQuery = "SELECT user_name FROM user WHERE user_name = ?";
-		// ¾ÆÀÌµð°¡ ÀÖÀ¸¸é true, ¾øÀ¸¸é false ¹ÝÈ¯
+		// ì•„ì´ë””ê°€ ìžˆìœ¼ë©´ true, ì—†ìœ¼ë©´ false ë°˜í™˜
 		return checkUserExistence(checkIdQuery, name);
 	}
 
@@ -85,11 +144,11 @@ public class GameDAO {
 		final String insertQuery = "INSERT INTO score (user_id, win, lose, draw) VALUES (?, 0, 0, 0)";
 		int affectedRows = 0;
 		try (
-				// java¿Í MySQLÀÇ ¿¬°áÅë·Î (Connection) »ý¼º
+				// javaì™€ MySQLì˜ ì—°ê²°í†µë¡œ (Connection) ìƒì„±
 				Connection connection = DBUtils.getConnection();
-				// Åë·Î¸¦ ÅëÇØ SQLÀ» Àü´ÞÇÒ °´Ã¼ Statement »ý¼º
+				// í†µë¡œë¥¼ í†µí•´ SQLì„ ì „ë‹¬í•  ê°ì²´ Statement ìƒì„±
 				PreparedStatement preparedStatement = createPrepaeredStatement(connection, insertQuery, userId);
-				// ½ÇÁ¦ Äõ¸® Àü´Þ ¹× ¼öÇà (ÁøÇà ½ÃÄÑ)
+				// ì‹¤ì œ ì¿¼ë¦¬ ì „ë‹¬ ë° ìˆ˜í–‰ (ì§„í–‰ ì‹œì¼œ)
 			)
 		{
 			affectedRows = preparedStatement.executeUpdate();
@@ -109,11 +168,11 @@ public class GameDAO {
 		final String selectQuery = "SELECT user_id FROM user WHERE user_name = ? ";
 		int id = 0;
 		try (
-				// java¿Í MySQLÀÇ ¿¬°áÅë·Î (Connection) »ý¼º
+				// javaì™€ MySQLì˜ ì—°ê²°í†µë¡œ (Connection) ìƒì„±
 				Connection connection = DBUtils.getConnection();
-				// Åë·Î¸¦ ÅëÇØ SQLÀ» Àü´ÞÇÒ °´Ã¼ Statement »ý¼º
+				// í†µë¡œë¥¼ í†µí•´ SQLì„ ì „ë‹¬í•  ê°ì²´ Statement ìƒì„±
 				PreparedStatement preparedStatement = createPrepaeredStatement(connection, selectQuery, name);
-				// ½ÇÁ¦ Äõ¸® Àü´Þ ¹× ¼öÇà (ÁøÇà ½ÃÄÑ)
+				// ì‹¤ì œ ì¿¼ë¦¬ ì „ë‹¬ ë° ìˆ˜í–‰ (ì§„í–‰ ì‹œì¼œ)
 				ResultSet resultSet = preparedStatement.executeQuery();
 			)
 		{	

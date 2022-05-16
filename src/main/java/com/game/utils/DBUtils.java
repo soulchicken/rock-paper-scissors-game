@@ -6,15 +6,16 @@ import java.sql.SQLException;
 
 public class DBUtils {
 	private static final String DB_URL = "jdbc:mysql://localhost:3306/";
-	// »ç¿ëÇÏ°íÀÚ ÇÏ´Â ½ºÅ°¸¶(Database) ÀÌ¸§
-	private static final String DATABASE_NAME = "testdb";
+	// ì‚¬ìš©í•˜ê³ ì í•˜ëŠ” ìŠ¤í‚¤ë§ˆ(Database)ì´ë¦„
+	private static final String DATABASE_NAME = "game";
 	private static final String USER = "root";
 	private static final String PASSWORD = "1234";
 	
-	
-	// Java¿Í MySQL database¿Í ¿¬°áÇÏ´Â ¸Ş¼Òµå
 	public static Connection getConnection() throws SQLException {
-		Connection connection = DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASSWORD);
-		return connection;
+		Connection connetion = DriverManager.getConnection(DB_URL + DATABASE_NAME, USER,PASSWORD);
+		return connetion;		
 	}
+
+
+
 }

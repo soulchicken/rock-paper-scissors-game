@@ -1,25 +1,74 @@
 package com.game.view;
 
-public class GameView {
+import java.util.List;
+import java.util.Scanner;
 
-	public void successPage() {
-		System.out.println("Á¤»ó µî·ÏµÇ¾ú½À´Ï´Ù.");
+import com.game.model.Game;
+
+import lombok.Getter;
+import lombok.Setter;
+@Getter
+@Setter
+public class GameView {
+	private Scanner sc;
+	private int numberChoice;
+	private int rate =1;
+	public GameView() {
+		this.sc = new Scanner(System.in);
+	}
+	public void gameMenu() {
+		System.out.println(">>1.ê²Œì„ì‹œì‘ 2.ë­í‚¹ë³´ê¸° 3.ë¡œê·¸ì•„ì›ƒ");
+		System.out.print(">>");
+		numberChoice = sc.nextInt();
+		
+	}
+	public void playingMenu() {
+		System.out.println(">>1.ë­í‚¹ë³´ê¸° 2.ë¡œê·¸ì•„ì›ƒ ");
+		System.out.print(">>");
+		numberChoice = sc.nextInt();
+	}
+    public void playGame(){
+        System.out.println(">>ê²Œì„ì„ ì‹œì‘í–ˆìŠµë‹ˆë‹¤. ì—¬ê¸°ë‹¤ê°€ ê²Œì„ ì‹¤í–‰í™”ë©´ ë„£ê¸°");
+        
+    }
+    public void ShowRankPage(List<Game> games) {
+    	System.out.println("ì „ì²´ ë­í‚¹");
+    	for (Game game : games) {
+    		
+			System.out.println(String.format("ì•„ì´ë”” %d, win %d, lose %d, draw %d total %d", 
+					game.getUser_id(),game.getWin(),game.getLose(), game.getDraw(), game.getTotalgames()));
+			System.out.println();
+		}
+    }
+	public void calRank(List<Game> games) {
+    		System.out.println("|----------ìˆœìœ„----------|");
+    	for (Game game : games) {
+ 
+			System.out.println(String.format("%dë“± ì•„ì´ë”” %d, odds %.0f í¼ì„¼íŠ¸" , 
+					rate,game.getUser_id(),game.getOdds()));
+			rate ++;
+			System.out.println();
+		}
+	}
+
+public void successPage() {
+		System.out.println("ì •ìƒ ë“±ë¡ë˜ì—ˆìŠµë‹ˆë‹¤.");
 	}
 
 	public void errorPage(Exception errorObject) {
-		System.out.println("¹®Á¦°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù. "+ errorObject.getMessage());
+		System.out.println("ë¬¸ì œê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤. "+ errorObject.getMessage());
 	}
 
 	public void joinUserInputName() {
-		System.out.println("À¯Àú ÀÌ¸§À» ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+		System.out.println("ìœ ì € ì´ë¦„ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.");
 	}
 
 	public void joinUserInputPassword() {
-		System.out.println("ºñ¹Ğ¹øÈ£À» ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+		System.out.println("ë¹„ë°€ë²ˆí˜¸ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.");
 	}
 
 	public void reInput() {
-		System.out.println("Áßº¹µÈ °ªÀÔ´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+		System.out.println("ì¤‘ë³µëœ ê°’ì…ë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”.");
 	}
 
 	

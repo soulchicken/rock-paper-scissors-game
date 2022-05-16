@@ -1,28 +1,70 @@
 package com.game.controller;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.game.service.GameService;
 import com.game.view.GameView;
+import com.game.model.Game;
+import com.game.model.User;
+import com.game.view.MenuView;
+
 
 public class GameController {
-
-	private final GameService gameService;
 	private final GameView gameView;
-	private Exception errorObject;
+	private final GameService gameService;
+	private final MenuView menuview;
+	private List<Game> games;
+	private User user;
+  private Exception errorObject;
 	Scanner sc = new Scanner(System.in);
 
 	public GameController() {
-		this.gameService = new GameService();
 		this.gameView = new GameView();
+		this.gameService = new GameService();
+		this.menuview = new MenuView();
+		this.user= new User();
+		
 	}
-	
-	public void joinUser() {
+	public void gameMenu() {
+		gameView.gameMenu();
+		chooseNumber();
+	}
+  	public void playGame(){
+		gameView.playGame();
+		gameView.playingMenu();
+		if(gameView.getNumberChoice() == 1) {
+			showRank();
+    	}else if(gameView.getNumberChoice() == 2) {
+    		logout();
+    	}
+    }
+	public void showRank() {
+		games = gameService.showRank();
+		games = gameService.calRank(games);
+		gameView.calRank(games);
+		
+	}
+	public void logout() {
+		menuview.logout();
+		user.setIs_login(false);
+		
+	}
+	public void chooseNumber() {
+		if(gameView.getNumberChoice() == 1) {
+			playGame();
+    	}else if(gameView.getNumberChoice() == 2) {
+    		showRank();
+    	}else if(gameView.getNumberChoice() == 3) {
+    		logout();
+    	}
+	}
+public void joinUser() {
 		String name;
 		while (true) {
 			gameView.joinUserInputName();
 			name = sc.next();
-			System.out.println("¿‘∑¬«— ¿Ã∏ß¿∫ "+name +" ¿‘¥œ¥Ÿ.");
+			System.out.println("ÏûÖÎ†•Ìïú Ïù¥Î¶ÑÏùÄ "+name +" ÏûÖÎãàÎã§.");
 			if (gameService.joinUserInputName(name)) {
 				gameView.reInput();
 			} else {
@@ -37,14 +79,12 @@ public class GameController {
 	public void save(int userId, String userName, String password, int isLogin) {
 		
 		int result = gameService.save(userId, userName, password, isLogin);
-		// µ•¿Ã≈Õ¿« ¿˙¿Â º∫∞¯ø©∫Œ¥¬ gameView∞° √‚∑¬«—¥Ÿ.
+		// Îç∞Ïù¥ÌÑ∞Ïùò Ï†ÄÏû• ÏÑ±Í≥µÏó¨Î∂ÄÎäî gameViewÍ∞Ä Ï∂úÎ†•ÌïúÎã§.
 		if (result > 0) {
 			gameView.successPage();
 		} else {
-			errorObject = new Exception("Database µÓ∑œ Ω«∆–");
+			errorObject = new Exception("Database Îì±Î°ù Ïã§Ìå®");
 			gameView.errorPage(errorObject);
 		}
 	}
-
-
 }
