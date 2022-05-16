@@ -1,8 +1,7 @@
 package com.game.service;
 
 import com.game.dao.GameDAO;
-import com.game.model.Game;
-import java.util.List;
+
 
 public class GameService {
 	private final GameDAO gameDAO;
@@ -20,13 +19,15 @@ public class GameService {
 	public boolean joinUserInputName(String name) {
 		return gameDAO.checkUserId(name);
   }
-  	public List<Game> showRank() {
-		return gameDAO.showRank();
+
+  
+  	public int login(String userId, String password) {
+		// TODO Auto-generated method stub
+		return gameDAO.login(userId, password);
 	}
-	public List<Game> calRank(List<Game> games){
-		return gameDAO.calculateRank(games);
 
+	public int logout(String userId, String password) {
+		// TODO Auto-generated method stub
+		return gameDAO.logout(userId, password);
 	}
-
-
 }
