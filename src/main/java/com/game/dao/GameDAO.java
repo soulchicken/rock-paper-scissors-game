@@ -62,71 +62,54 @@ public class GameDAO {
 	}
 
 	/**
+	 * loginSwitch 값에 따라 로그인 또는 로그아웃을 하는 메서드 
+	 * @param userId
+	 * @param password
+	 * @param loginSwitch 1이면 로그인, 0이면 로그아웃
+	 * @return 변경된 row 개수
+	 */
+	public int setLoginLogout(String userId, String password, int loginSwitch) {
+		String userCheckQuery = "SELECT * FROM user WHERE user_name = ? AND password = ?";
+		if (checkUserExistence(userCheckQuery, userId, password)) {
+			String loginLogoutQuery = String.format("UPDATE user SET is_login = %d WHERE user_name = ? AND password = ?", loginSwitch);
+			
+			try (
+					Connection connection = DBUtils.getConnection();
+					PreparedStatement preparedStatement = createPreparedStatement(connection, loginLogoutQuery, userId, password);
+
+					){
+				System.out.println("Service -> DAO");
+				return preparedStatement.executeUpdate();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+		
+		
+		return 0;
+	}
+	
+	/**
 	 * 로그인 메서드
-	 * 로그인 하면 is_login값을 true로 변경하는 메서드
 	 * @param userId
 	 * @param password
 	 * @return
 	 */
 	public int login(String userId, String password) {
 		// TODO Auto-generated method stub
-		String userCheckQuery = "SELECT * FROM user WHERE user_name = ? AND password = ?";
-		
-		
-		if (checkUserExistence(userCheckQuery, userId, password)) {
-			System.out.println("login check");
-	        String loginSettingQuery = String.format("UPDATE user SET is_login = %s WHERE user_name = ? AND password = ?", "1");
-
-			try (
-					Connection connection = DBUtils.getConnection();
-					PreparedStatement preparedStatement = createPreparedStatement(connection, loginSettingQuery, userId, password);
-
-					
-					){
-				int a = preparedStatement.executeUpdate();
-				if (a != 0) System.out.println("Service -> DAO" + a + "!");
-				return a;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
-		
-		
-		return 0;
+		return setLoginLogout(userId, password, 1);
 	}
 
-
-
-
+	/**
+	 * 로그아웃메서드
+	 * @param userId
+	 * @param password
+	 * @return
+	 */
 	public int logout(String userId, String password) {
 		// TODO Auto-generated method stub
-		String userCheckQuery = "SELECT * FROM user WHERE user_name = ? AND password = ?";
-		
-		if (checkUserExistence(userCheckQuery, userId, password)) {
-			System.out.println("login check");
-	        String loginSettingQuery = String.format("UPDATE user SET is_login = %s WHERE user_name = ? AND password = ?", "0");
-
-			try (
-					Connection connection = DBUtils.getConnection();
-					PreparedStatement preparedStatement = createPreparedStatement(connection, loginSettingQuery, userId, password);
-
-					
-					){
-				int a = preparedStatement.executeUpdate();
-				if (a != 0) System.out.println("Service -> DAO" + a + "!");
-				return a;
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
-		
-		
-		
-		return 0;
+		return setLoginLogout(userId, password, 0);
 	}
-	
-	
-	
 	
 	
 

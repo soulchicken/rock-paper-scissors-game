@@ -8,9 +8,8 @@ public class App {
 		// TODO Auto-generated method stub
 		
 		GameController gameController = new GameController();
-		
-//		gameController.login("zxc", "123'");
-		
+		gameController.login("zxc", "123'");
+		gameController.login("root", "1234");
 		gameController.logout("zxc", "123'");
 		
 		System.out.println(123);
