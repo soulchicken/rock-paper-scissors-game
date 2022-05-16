@@ -89,18 +89,18 @@ public class RankDAO {
     
 //    ===============================================================================
     
-    public int logout(String userName, String password) {
+    public int logout(String userName) {
 		// TODO Auto-generated method stub
-    		String loginCheckQuery = "SELECT is_login FROM user WHERE user_name = ? AND password = ?";
-    		if (checkUserExistence(loginCheckQuery, userName, password)) {
+    		String loginCheckQuery = "SELECT is_login FROM user WHERE user_name = ?";
+    		if (checkUserExistence(loginCheckQuery, userName)) {
     			
     			LocalDateTime now = LocalDateTime.now();
     			String formattedNow = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
-    			String logoutQuery = String.format("UPDATE user SET is_login = 0 WHERE user_name = ? AND password = ?");
+    			String logoutQuery = String.format("UPDATE user SET is_login = 0 WHERE user_name = ?");
     			
     			try (Connection connection = DBUtils.getConnection();
-    					 PreparedStatement preparedStatement = createPreparedStatement(connection, logoutQuery, userName, password);) {
+    					 PreparedStatement preparedStatement = createPreparedStatement(connection, logoutQuery, userName);) {
     					
     					addLoginLog(userName, formattedNow);
     					return preparedStatement.executeUpdate();
@@ -154,10 +154,10 @@ public class RankDAO {
 	}
 
 
-	public boolean checkUserExistence(String sql, String id, String password) {
+	public boolean checkUserExistence(String sql, String id) {
 		boolean result = false;
 		try (Connection connection = DBUtils.getConnection();
-			 PreparedStatement preparedStatement = createPreparedStatement(connection, sql, id, password);) {
+			 PreparedStatement preparedStatement = createPreparedStatement(connection, sql, id);) {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
 				result = true;
@@ -171,13 +171,7 @@ public class RankDAO {
 		return result;
 	}
 
-    private PreparedStatement createPreparedStatement(Connection connection, String query, String userId, String password) throws SQLException {
-		preparedStatement = connection.prepareStatement(query); // query 전달 객체
-		preparedStatement.setString(1, userId);
-		preparedStatement.setString(2, password);
-		return preparedStatement;
-	}
-    
+
 	private PreparedStatement createPreparedStatement(Connection connection, String query, String userName) throws SQLException {
 		// TODO Auto-generated method stub
 		preparedStatement = connection.prepareStatement(query);
