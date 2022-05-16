@@ -70,114 +70,42 @@
 
 ## **05. ERD (Entity Relationship Diagram)**
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/34b71601-e477-4a51-a0e6-1becc8387bb5/Untitled.png)
+![ERD](./img/ERD.png)
 
 ### **user** 테이블
-
-column
-
-data type
-
-설명
-
-user_id (PK)
-
-smallint
-
-고유 아이디
-
-user_name
-
-varchar(45)
-
-로그인 아이디
-
-password
-
-varchar(45)
-
-로그인 비밀번호
-
-is_login
-
-tinyint
-
-로그인 상태
-
+| column | data type | 설명 |
+| --- | --- | --- |
+| user_id (PK) | smallint | 고유 아이디 |
+| user_name  | varchar(45) | 로그인 아이디 |
+| password  | varchar(45) | 로그인 비밀번호 |
+| is_login  | tinyint | 로그인 상태 |
 ### **score** 테이블
-
-column
-
-data type
-
-설명
-
-user_id (PK, FK)
-
-smallint
-
-고유 아이디
-
-win
-
-smallint
-
-승리 횟수
-
-lose
-
-smallint
-
-패배 횟수
-
-draw
-
-smallint
-
-무승부 횟수
-
--   회원가입시 승, 무, 패는 0, 0, 0 으로 시작
--   AI와 게임시 해당 결과의 값을 1 증가
-
+| column | data type | 설명 |
+| --- | --- | --- |
+| user_id (PK, FK) | smallint | 고유 아이디 |
+| win  | smallint | 승리 횟수 |
+| lose  | smallint | 패배 횟수 |
+| draw | smallint | 무승부 횟수 |
+- 회원가입시 승, 무, 패는 0, 0, 0 으로 시작
+- AI와 게임시 해당 결과의 값을 1 증가
 ### login_log 테이블
-
-column
-
-data type
-
-설명
-
-user_id (FK)
-
-SMALLINT
-
-고유 아이디
-
-login_time
-
-datetime
-
-승리 횟수
-
-logout_time
-
-datetime
-
-패배 횟수
+| column | data type | 설명 |
+| --- | --- | --- |
+| user_id (FK) | SMALLINT | 고유 아이디 |
+| login_time  | datetime | 승리 횟수 |
+| logout_time  | datetime | 패배 횟수 |
 
 -   로그인 시간, 로그아웃 시간이 기록된다.
 -   소프트웨어 내에 영향을 주지 않지만 이후 사용자 관리 등 프로그램 확장에 용이하다.
 
 ## **06. 트러블 슈팅**
-
--   merge 너무 정신없음
--   logout(id, password) : 코드 합치는 과정에서 구현 실패,, 현재 로그인한 아이디와 비밀번호를 받는 과정에서 에러 발생
-    -   이거 해결해버림... ㄷㄷ
+![Pull](./img/pull.png)
+- ✅  merge 과정의 어려움 / Pull request 지옥.
+- ✅  logout(id, password) : 코드 합치는 과정에서 구현 실패. 현재 로그인한 아이디와 비밀번호를 받는 과정에서 에러 발생
 
 ## **07. 느낀 점**
 
 -   황솔희 : 항상 남이 해주는 git관리에 익숙해진 내 머리로,, 관리를 하게되면서 개인적으로 프로젝트 구현 보다 더 어렵다고 느꼈다,,,,, 😂
--   장영광 : 배워도 써먹질 못하니 열심히 공부해야겠다..ㅜㅜ
+-   장영광 : 배워도 써먹질 못하니 열심히 공부해야겠다..멋지고 똑똑한 조원들을 만나 배운게  많은 프로젝트였다. 다음에 또 봐요!!!🤩
 -   박동규 : git으로 협업은 처음인데, 멋진 조원분들과 같이해서 좋았다. 많이 배운 프로젝트였다. 다음에 또 만나요!
--   김동현 : 협업은 늘 어렵네요. 발전하는 기분이 듭니다. 다들 너무 각자의 자리에서 최선을 다했습니다. 다들 또 보죠.
-    -   갱장해 엄청나
+-   김동현 : 협업은 늘 어렵네요. 발전하는 기분이 듭니다. ✏️ 다들 너무 각자의 자리에서 최선을 다했습니다. 다들 또 보죠. 
