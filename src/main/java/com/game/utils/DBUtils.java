@@ -16,6 +16,4 @@ public class DBUtils {
 		return connetion;		
 	}
 
-
-
 }
