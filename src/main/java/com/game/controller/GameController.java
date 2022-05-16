@@ -9,6 +9,7 @@ import com.game.view.GameView;
 public class GameController {
 	private final GameView gameView;
 	private final GameService gameService;
+	private final RankController rankController;
 
   private Exception errorObject;
 	Scanner sc = new Scanner(System.in);
@@ -17,7 +18,7 @@ public class GameController {
 	public GameController() {
 		this.gameView = new GameView();
 		this.gameService = new GameService();
-
+		this.rankController = new RankController();
 	}
 
 	/**
@@ -29,6 +30,7 @@ public class GameController {
 		// TODO Auto-generated method stub
 		if (gameService.login(userId, password) != 0) {
 			gameView.login("로그인되었습니다. ");
+			rankController.gameMenu();
 		}
 		else {
 			gameView.login("없는 회원정보입니다.");
