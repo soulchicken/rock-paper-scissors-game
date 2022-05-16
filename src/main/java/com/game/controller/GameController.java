@@ -44,17 +44,16 @@ public class GameController {
 	 * @param userId
 	 * @param password
 	 */
-	public void logout(String userId, String password) {
-		// TODO Auto-generated method stub
-		if (gameService.logout(userId, password) != 0) {
-			gameView.logout("로그아웃되었습니다.");
-		}
-		else {
-			gameView.logout("잠시 후 다시 로그아웃해주세요");
-		}
-
-	}
-
+//	public void logout(String userId, String password) {
+//		// TODO Auto-generated method stub
+//		if (gameService.logout(userId, password) != 0) {
+//			gameView.logout("로그아웃되었습니다.");
+//		}
+//		else {
+//			gameView.logout("잠시 후 다시 로그아웃해주세요");
+//		}
+//
+//	}
 
 
     public void joinUser() {
@@ -87,5 +86,6 @@ public class GameController {
 	}
 
 
-}
 
+
+}

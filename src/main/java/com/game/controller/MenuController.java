@@ -1,6 +1,5 @@
 package com.game.controller;
 
-import com.game.model.Game;
 import com.game.model.User;
 import com.game.view.MenuView;
 

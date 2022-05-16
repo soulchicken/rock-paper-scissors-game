@@ -4,10 +4,7 @@ import java.sql.Connection;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
-
 import java.sql.PreparedStatement;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -16,7 +13,7 @@ import com.game.utils.DBUtils;
 
 public class GameDAO {
 
-	//kim
+
 	public int saveUser(int userId, String userName, String password, int isLogin) {
 		final String insertQuery = "INSERT INTO user (user_name, password, is_login) VALUES (?,?,?)";
 		int affectedRows = 0;
@@ -207,18 +204,14 @@ public class GameDAO {
 	}
 
 
-	private int addLoginLog(String userName, String now, int loginSwitch) {
+	private int addLoginLog(String userName, String now) {
 		// TODO Auto-generated method stub
 		String addLogQuery;
 
 		int updatedRow = 0;
+		addLogQuery = String.format("INSERT INTO login_log (user_id, login_time) VALUES (?, \"%s\")", now);
 
-		if (loginSwitch == 1) {
-			addLogQuery = String.format("INSERT INTO login_log (user_id, login_time) VALUES (?, \"%s\")", now);
-		} else {
-			addLogQuery = String.format("UPDATE login_log SET logout_time = \"%s\" WHERE user_id = ? and logout_time IS NULL", now);
-		}
-
+		
 		try (Connection connection = DBUtils.getConnection();
 			 PreparedStatement preparedStatement = createPreparedStatement(connection, addLogQuery, findUserIdNyName(userName));) {
 			return preparedStatement.executeUpdate();
@@ -232,18 +225,19 @@ public class GameDAO {
 	}
 
 
-	public int setLoginLogout(String userName, String password, int loginSwitch) {
+	public int setLogin(String userName, String password) {
 		String userCheckQuery = "SELECT * FROM user WHERE user_name = ? AND password = ?";
 		if (checkUserExistence(userCheckQuery, userName, password)) {
 
 			LocalDateTime now = LocalDateTime.now();
 			String formattedNow = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
-			String loginLogoutQuery = String.format("UPDATE user SET is_login = %d WHERE user_name = ? AND password = ?", loginSwitch);
+			String loginLogoutQuery = String.format("UPDATE user SET is_login = 1 WHERE user_name = ? AND password = ?");
 
 			try (Connection connection = DBUtils.getConnection();
 				 PreparedStatement preparedStatement = createPreparedStatement(connection, loginLogoutQuery, userName, password);) {
-				addLoginLog(userName, formattedNow, loginSwitch);
+				
+				addLoginLog(userName, formattedNow);
 				return preparedStatement.executeUpdate();
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -258,12 +252,7 @@ public class GameDAO {
 
 	public int login(String userName, String password) {
 		// TODO Auto-generated method stub
-		return setLoginLogout(userName, password, 1);
+		return setLogin(userName, password);
 	}
 
-
-	public int logout(String userName, String password) {
-		// TODO Auto-generated method stub
-		return setLoginLogout(userName, password, 0);
-	}
 }

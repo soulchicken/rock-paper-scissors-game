@@ -26,8 +26,8 @@ public class GameService {
 		return gameDAO.login(userId, password);
 	}
 
-	public int logout(String userId, String password) {
-		// TODO Auto-generated method stub
-		return gameDAO.logout(userId, password);
-	}
+//	public int logout(String userId, String password) {
+//		// TODO Auto-generated method stub
+//		return gameDAO.logout(userId, password);
+//	}
 }

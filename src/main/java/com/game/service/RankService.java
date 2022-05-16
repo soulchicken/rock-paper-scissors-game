@@ -5,20 +5,25 @@ import com.game.model.Game;
 import java.util.List;
 
 public class RankService {
-    private final RankDAO rankDAO;
+	private final RankDAO rankDAO;
 
-    public RankService() {
-        this.rankDAO = new RankDAO();
-    }
+	public RankService() {
+		this.rankDAO = new RankDAO();
+	}
 
 
-    public List<Game> showRank() {
-        return rankDAO.showRank();
-    }
+	public List<Game> showRank() {
+		return rankDAO.showRank();
+	}
 
-    public List<Game> calRank(List<Game> games){
-        return rankDAO.calculateRank(games);
+	public List<Game> calRank(List<Game> games){
+		return rankDAO.calculateRank(games);
 
-    }
+	}
+
+	public int logout(String userName) {
+		// TODO Auto-generated method stub
+		return rankDAO.logout(userName);
+	}
 
 }

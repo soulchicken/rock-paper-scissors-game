@@ -2,6 +2,7 @@ package com.game.controller;
 
 import com.game.dao.GameDAO;
 import com.game.model.Game;
+
 import com.game.model.Stage;
 import com.game.model.User;
 
@@ -18,15 +19,19 @@ public class RankController {
     private final RankService rankService;
     private final MenuView menuview;
     private List<Game> games;
+
     private User user;
     private GameDAO gameDAO;
+
 
     public RankController() {
         this.rankView = new RankView();
         this.rankService = new RankService();
         this.menuview = new MenuView();
+
         this.user = new User();
         this.gameDAO = new GameDAO();
+
 
     }
 
@@ -42,7 +47,7 @@ public class RankController {
         if(rankView.getNumberChoice() == 1) {
             showRank();
         }else if(rankView.getNumberChoice() == 2) {
-            logout();
+            logout(userName);
         }
     }
     public void showRank() {
@@ -51,9 +56,11 @@ public class RankController {
         rankView.calRank(games);
 
     }
-    public void logout() {
+    public void logout(String userName) {
+//        user.setIs_login(false);
+//        gameController.logout(user.getId(), user.getPassword());
+    		rankService.logout(userName);
         menuview.logout();
-        user.setIs_login(false);
 
     }
     public void chooseNumber(String userName) {
@@ -62,7 +69,7 @@ public class RankController {
         }else if(rankView.getNumberChoice() == 2) {
             showRank();
         }else if(rankView.getNumberChoice() == 3) {
-            logout();
+            logout(userName);
         }
     }
 }
