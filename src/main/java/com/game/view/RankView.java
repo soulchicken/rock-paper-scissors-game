@@ -40,7 +40,7 @@ public class RankView {
         System.out.println("|----------순위----------|");
 
         for (Game game : games) {
-            System.out.println(String.format("%d등 아이디 %d, odds %.0f 퍼센트",
+            System.out.println(String.format("%d등 아이디 %d, 승률 %.0f 퍼센트",
                     rate, game.getUser_id(), game.getOdds()));
             rate++;
             System.out.println();
