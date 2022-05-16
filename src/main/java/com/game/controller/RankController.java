@@ -25,17 +25,17 @@ public class RankController {
 
     }
 
-    public void gameMenu(String userName, String password) {
+    public void gameMenu(String userName) {
         rankView.gameMenu();
-        chooseNumber(userName, password);
+        chooseNumber(userName);
     }
-    public void playGame(String userName, String password){
+    public void playGame(String userName){
         rankView.playGame();
         rankView.playingMenu();
         if(rankView.getNumberChoice() == 1) {
             showRank();
         }else if(rankView.getNumberChoice() == 2) {
-            logout(userName, password);
+            logout(userName);
         }
     }
     public void showRank() {
@@ -44,20 +44,20 @@ public class RankController {
         rankView.calRank(games);
 
     }
-    public void logout(String userName, String password) {
+    public void logout(String userName) {
 //        user.setIs_login(false);
 //        gameController.logout(user.getId(), user.getPassword());
-    		rankService.logout(userName, password);
+    		rankService.logout(userName);
         menuview.logout();
 
     }
-    public void chooseNumber(String userName, String password) {
+    public void chooseNumber(String userName) {
         if(rankView.getNumberChoice() == 1) {
-            playGame(userName, password);
+            playGame(userName);
         }else if(rankView.getNumberChoice() == 2) {
             showRank();
         }else if(rankView.getNumberChoice() == 3) {
-            logout(userName, password);
+            logout(userName);
         }
     }
 }

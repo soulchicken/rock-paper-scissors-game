@@ -32,7 +32,7 @@ public class GameController {
 		// TODO Auto-generated method stub
 		if (gameService.login(userName, password) != 0) {
 			gameView.login("로그인되었습니다. ");
-			rankController.gameMenu(userName, password);
+			rankController.gameMenu(userName);
 		}
 		else {
 			gameView.login("없는 회원정보입니다.");

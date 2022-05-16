@@ -21,9 +21,9 @@ public class RankService {
 
 	}
 
-	public int logout(String userName, String password) {
+	public int logout(String userName) {
 		// TODO Auto-generated method stub
-		return rankDAO.logout(userName, password);
+		return rankDAO.logout(userName);
 	}
 
 }
