@@ -1,13 +1,14 @@
 
 package com.game;
 
-import com.game.controller.MenuController;
+import com.game.controller.GameController;
+
 
 public class App {
 
 	public static void main(String[] args) {
-		MenuController menuController = new MenuController();
-		menuController.main();
+  	GameController gameController = new GameController();
+		gameController.joinUser();
 	}
 
 }
