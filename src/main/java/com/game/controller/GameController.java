@@ -19,13 +19,15 @@ public class GameController {
 	 * @param userId
 	 * @param password
 	 */
-	public void login(String userId, String password) {
+	public boolean login(String userId, String password) {
 		// TODO Auto-generated method stub
 		if (gameService.login(userId, password) != 0) {
 			gameView.login("로그인되었습니다. ");
+			return true;
 		}
 		else {
 			gameView.login("없는 회원정보입니다.");
+			return false;
 		}
 	}
 
@@ -35,13 +37,15 @@ public class GameController {
 	 * @param userId
 	 * @param password
 	 */
-	public void logout(String userId, String password) {
+	public boolean logout(String userId, String password) {
 		// TODO Auto-generated method stub
 		if (gameService.logout(userId, password) != 0) {
 			gameView.logout("로그아웃되었습니다.");
+			return true;
 		}
 		else {
 			gameView.logout("잠시 후 다시 로그아웃해주세요");
+			return false;
 		}
 
 	}
