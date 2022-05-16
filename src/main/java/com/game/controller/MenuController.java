@@ -26,6 +26,10 @@ public class MenuController {
     	}else if(menuView.getNumberChoice() == 2) {
             System.out.println(">>회원가입을 진행하겠습니다");
             gameController.joinUser();
+            menuView.loginpage();
+            user.setId(menuView.getUser().getId());
+            user.setPassword(menuView.getUser().getPassword());
+            gameController.login(user.getId(), user.getPassword());
     	}
     	
     }
