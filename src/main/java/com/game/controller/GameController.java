@@ -28,11 +28,11 @@ public class GameController {
 	 * @param userId
 	 * @param password
 	 */
-	public void login(String userId, String password) {
+	public void login(String userName, String password) {
 		// TODO Auto-generated method stub
-		if (gameService.login(userId, password) != 0) {
+		if (gameService.login(userName, password) != 0) {
 			gameView.login("로그인되었습니다. ");
-			rankController.gameMenu();
+			rankController.gameMenu(userName, password);
 		}
 		else {
 			gameView.login("없는 회원정보입니다.");
@@ -44,17 +44,16 @@ public class GameController {
 	 * @param userId
 	 * @param password
 	 */
-	public void logout(String userId, String password) {
-		// TODO Auto-generated method stub
-		if (gameService.logout(userId, password) != 0) {
-			gameView.logout("로그아웃되었습니다.");
-		}
-		else {
-			gameView.logout("잠시 후 다시 로그아웃해주세요");
-		}
-
-	}
-
+//	public void logout(String userId, String password) {
+//		// TODO Auto-generated method stub
+//		if (gameService.logout(userId, password) != 0) {
+//			gameView.logout("로그아웃되었습니다.");
+//		}
+//		else {
+//			gameView.logout("잠시 후 다시 로그아웃해주세요");
+//		}
+//
+//	}
 
 
     public void joinUser() {
@@ -87,5 +86,6 @@ public class GameController {
 	}
 
 
-}
 
+
+}
