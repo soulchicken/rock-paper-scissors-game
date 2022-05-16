@@ -1,5 +1,6 @@
 package com.game.controller;
 
+import com.game.model.Game;
 import com.game.model.User;
 import com.game.view.MenuView;
 
@@ -7,48 +8,28 @@ public class MenuController {
     private final MenuView menuView;
     private final User user;
     private final RankController rankController;
+    private final GameController gameController;
     public MenuController(){
         this.menuView = new MenuView();
         this.user = new User();
         this.rankController = new RankController();
+        this.gameController = new GameController();
        
     }
     public void main() {
     	menuView.mainPage();
     	if(menuView.getNumberChoice() == 1) {
-    		login();
+            menuView.loginpage();
+            user.setId(menuView.getUser().getId());
+            user.setPassword(menuView.getUser().getPassword());
+            gameController.login(user.getId(), user.getPassword());
+            rankController.gameMenu();
     	}else if(menuView.getNumberChoice() == 2) {
-    		System.out.println("회원가입");
-    		signUp();
+            System.out.println(">>회원가입을 진행하겠습니다");
+            gameController.joinUser();
     	}
     	
     }
-    public void login(){
-        menuView.loginpage();
-        //아이디 비밀번호 입력 성공, 실패 관련 if문 작성예정
-        if(true) {
-        	menuView.loginSuccess();
-        	user.setIs_login(true);
-        	//게임 컨트롤러로 이동
-            rankController.gameMenu();
-        	
-        }else {
-        	menuView.loginError();
-        	user.setIs_login(false);
-        }
-    }
-    public void signUp() {
-    	//회원가입 컨트롤러
-    	menuView.signup();
-    	if(true) {
-        	menuView.signupSuccess();
-        	login();
-        	
-        	//게임 컨트롤러로 이동
-        }else {
-        	menuView.signupError();
-        }
-    }
-    
+
 
 }

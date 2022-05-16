@@ -8,7 +8,7 @@ import java.util.Scanner;
 @Getter
 public class MenuView {
     private Scanner sc;
-    private final User user;
+    private User user;
     private int numberChoice;
 
     public MenuView(){
@@ -32,23 +32,9 @@ public class MenuView {
         System.out.print(">>");
         user.setPassword(sc.next());
 
-        //아이디 비밀번호 확인
-        System.out.println(user.toString());
     }
-    public void loginSuccess() {System.out.println(">>로그인에 성공하였습니다");}
-    public void loginError() {
-    	System.out.println(">>로그인에 실패하였습니다.");
-    	System.out.println(">>아이디와 비밀번호를 다시 입력해주세요");
-    }
-    public void signup() {
-    	System.out.println(">>회원가입을 진행해주세요.");
-    	//회원가입 관련 view
-    }
-    public void signupSuccess() {System.out.println(">>회원가입에 성공하였습니다");}
-    public void signupError() {
-    	System.out.println(">>회원가입에 실패하였습니다.");
-    	System.out.println(">>아이디와 비밀번호를 다시 입력해주세요");
-    }
+
+
 	public void logout() {
 		System.out.println(">>로그아웃 되었습니다");
 	}
