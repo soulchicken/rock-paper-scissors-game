@@ -17,6 +17,22 @@ public class GameController {
 		this.gameView = new GameView();
 	}
 	
+	public void joinUser() {
+		String name;
+		while (true) {
+			gameView.joinUserInputName();
+			name = sc.next();
+			if (gameService.joinUserInputName(name)) {
+				break;
+			} else {
+				gameView.reInput();
+			}
+		}
+		gameView.joinUserInputPassword();
+		String password = sc.next();
+		save(0, name,password,0);
+	}
+	
 	public void save(int userId, String userName, String password, int isLogin) {
 		
 		int result = gameService.save(userId, userName, password, isLogin);
@@ -29,11 +45,5 @@ public class GameController {
 		}
 	}
 
-	public void joinUser() {
-		gameView.joinUserInputName();
-		String name;
-		gameView.joinUserInputPassword();
-		String password;
-	}
 
 }

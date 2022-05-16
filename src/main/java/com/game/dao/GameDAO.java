@@ -72,4 +72,10 @@ public class GameDAO {
 		preparedStatement.setString(1, id);
 		return preparedStatement;
 	}
+
+	public boolean checkUserId(String name) {
+		final String checkIdQuery = "SELECT user_name FROM user WHERE user_name = ?";
+		// 아이디가 있으면 true, 없으면 false 반환
+		return checkUserExistence(checkIdQuery, name);
+	}
 }

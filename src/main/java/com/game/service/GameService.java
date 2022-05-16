@@ -14,4 +14,8 @@ public class GameService {
 		return gameDAO.save(userId, userName, password, isLogin);
 	}
 
+	public boolean joinUserInputName(String name) {
+		return gameDAO.checkUserId(name);
+	}
+
 }

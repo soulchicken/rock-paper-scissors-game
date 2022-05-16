@@ -18,5 +18,9 @@ public class GameView {
 		System.out.println("비밀번호을 입력해주세요.");
 	}
 
+	public void reInput() {
+		System.out.println("중복된 값입니다. 다시 입력해주세요.");
+	}
+
 	
 }
