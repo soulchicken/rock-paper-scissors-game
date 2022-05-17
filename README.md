@@ -92,8 +92,8 @@
 | column | data type | 설명 |
 | --- | --- | --- |
 | user_id (FK) | SMALLINT | 고유 아이디 |
-| login_time  | DATETIME | 승리 횟수 |
-| logout_time  | DATETIME | 패배 횟수 |
+| login_time  | DATETIME | 로그인한 시간 |
+| logout_time  | DATETIME | 로그아웃한 시간 |
 
 -   로그인 시간, 로그아웃 시간이 기록된다.
 -   소프트웨어 내에 영향을 주지 않지만 이후 사용자 관리 등 프로그램 확장에 용이하다.
