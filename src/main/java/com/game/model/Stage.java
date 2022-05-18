@@ -13,6 +13,8 @@ public class Stage {
 
 		Scanner scanner = new Scanner(System.in);
 		Dao dao = new Dao();
+		final int GAME_END_NUMBER = 0;
+		final int GAME_START_NUMBER = 1; 
 		
 		System.out.println("가위바위보 게임을 시작하시겠습니까? 0.NO 1.YES");
 	
@@ -27,18 +29,19 @@ public class Stage {
 	
 		//가위바위보 게임 반복문
 		while (true) {
-				
+			
+			
 			//0:게임종료, 1:게임시작
 			int cn = scanner.nextInt();
 
-			if (cn == 0) {
+			if (cn == GAME_END_NUMBER) {
 				System.out.println("게임을 종료합니다.");
 				System.out.println("최종 스코어 - 이긴 횟수 : " + winScore + ", 진 횟수 : " + loseScore + ", 비긴 횟수 : " + drawScore);
 				dao.save(id, winScore, loseScore, drawScore);
 				
 				break;
 								
-			} else {
+			} else if (cn == GAME_START_NUMBER) {
 				
 				System.out.println("안내면 진거 가위바위보!");
 				System.out.println("입력하세요 : 1.가위, 2.바위, 3.보");
@@ -78,6 +81,8 @@ public class Stage {
 				System.out.println("게임을 계속 하시겠습니까? 0.No 1.Yes");
 
 
+			} else {
+				System.out.println("0, 1 중 하나만 입력해주세요.");
 			}
 		}
 	}
