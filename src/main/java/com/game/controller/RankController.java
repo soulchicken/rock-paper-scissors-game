@@ -1,6 +1,11 @@
 package com.game.controller;
 
+import com.game.dao.GameDAO;
 import com.game.model.Game;
+
+import com.game.model.Stage;
+import com.game.model.User;
+
 import java.util.List;
 
 
@@ -14,14 +19,19 @@ public class RankController {
     private final RankService rankService;
     private final MenuView menuview;
     private List<Game> games;
-    
+
+    private User user;
+    private GameDAO gameDAO;
+
 
     public RankController() {
         this.rankView = new RankView();
         this.rankService = new RankService();
         this.menuview = new MenuView();
-        
-        
+
+        this.user = new User();
+        this.gameDAO = new GameDAO();
+
 
     }
 
@@ -31,6 +41,8 @@ public class RankController {
     }
     public void playGame(String userName){
         rankView.playGame();
+        Stage.gameStart(gameDAO.findUserIdNyName(userName));
+        
         rankView.playingMenu();
         if(rankView.getNumberChoice() == 1) {
             showRank();

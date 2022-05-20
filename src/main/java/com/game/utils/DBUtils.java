@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 public class DBUtils {
  	private static final String DB_URL = "jdbc:mysql://localhost:3306/"; // mysql server url
- 	private static final String DATABASE_NAME = "rsptest"; // database schema name
+ 	private static final String DATABASE_NAME = "game"; // database schema name
  	private static final String USER = "root";
  	private static final String  PASSWORD = "1234";
 
