@@ -19,17 +19,17 @@ public class Stage {
 	final static int LOSE = 1;
 	final static int DRAW = 2;
 	
-	
 	static Scanner scanner = new Scanner(System.in);
 	
 	public static void gameStart(int id) {
 		StageView stageView = new StageView();
 
+		int userSaidNumber;
 		Dao dao = new Dao();
 		final int GAME_END_NUMBER = 0;
 		final int GAME_START_NUMBER = 1; 
 		
-		System.out.println("가위바위보 게임을 시작하시겠습니까? 0.NO 1.YES");
+		stageView.StageStart();
 	
 		//승률 초기값
 		int[] scores = new int[3];
@@ -45,17 +45,17 @@ public class Stage {
 			
 			
 			//0:게임종료, 1:게임시작
-			int cn = scanner.nextInt();
+			userSaidNumber = scanner.nextInt();
 
-			if (cn == GAME_END_NUMBER) {
+			if (userSaidNumber == GAME_END_NUMBER) {
 				stageView.EndOfStage(winScore, loseScore, drawScore);
 				dao.save(id, winScore, loseScore, drawScore);
 				
 				break;
 								
-			} else if (cn == GAME_START_NUMBER) {
+			} else if (userSaidNumber == GAME_START_NUMBER) {
 				
-				stageView.stageStart();
+				stageView.BattleStart();
 				
 				int input = scanner.nextInt();// 입력
 
@@ -86,15 +86,15 @@ public class Stage {
 				}
 				stageView.ScoreResult(winScore, loseScore, drawScore);
 
-				// 계속 할거임?
-				System.out.println("게임을 계속 하시겠습니까? 0.No 1.Yes");
+				stageView.StageReStart();
 
 
 			} else {
-				System.out.println("0, 1 중 하나만 입력해주세요.");
+				stageView.stageInputErrorMassage();
 			}
 		}
 	}
+
 
 	public static int Winner(int user, int com) {
 		if (user == com) 

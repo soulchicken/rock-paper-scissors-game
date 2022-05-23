@@ -3,7 +3,20 @@ package com.game.view;
 import java.util.HashMap;
 
 public class StageView {
-	public void stageStart() {
+	public void StageStart() {
+		System.out.println("가위바위보 게임을 시작하시겠습니까? 0.NO 1.YES");
+	}
+	
+	public void StageReStart() {
+		// 계속 할거임?
+		System.out.println("게임을 계속 하시겠습니까? 0.No 1.Yes");
+	}
+	
+	public void stageInputErrorMassage() {
+		System.out.println("0, 1 중 하나만 입력해주세요.");		
+	}
+	
+	public void BattleStart() {
 		System.out.println("안내면 진거 가위바위보!");
 		System.out.println("입력하세요 : 1.가위, 2.바위, 3.보");
 	}
