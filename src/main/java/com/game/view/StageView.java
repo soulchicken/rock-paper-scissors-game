@@ -1,5 +1,7 @@
 package com.game.view;
 
+import java.util.HashMap;
+
 public class StageView {
 	public void stageStart() {
 		System.out.println("안내면 진거 가위바위보!");
@@ -9,6 +11,12 @@ public class StageView {
 	public void ScoreResult(int winScore, int loseScore, int drawScore) {
 		System.out.println("이긴 횟수 : " + winScore + ", 진 횟수 : " + loseScore + ", 비긴 횟수 : " + drawScore);
 	}
+	
+	public void ChooseOnesHand(int input, int comCase, HashMap<Integer, String> hMap) {
+		System.out.println("유저의 선택 :: " + hMap.get(input));
+		System.out.println("컴퓨터의 선택 :: " + hMap.get(comCase));
+	}
+
 	
 	public void StageResult(int rsInt) {
 		String[] rsWinner = { "WIN!!", "LOSE", "DRAW" };

@@ -69,8 +69,7 @@ public class Stage {
 				hMap.put(PAPER, "보");
 
 				// 선택 출력
-				System.out.println("유저의 선택 :: " + hMap.get(input));
-				System.out.println("컴퓨터의 선택 :: " + hMap.get(comCase));
+				stageView.ChooseOnesHand(input, comCase, hMap);
 				
 
 				// 승자 결정
