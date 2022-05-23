@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import com.game.dao.Dao;
+import com.game.view.StageView;
 
 
 public class Stage {
@@ -19,9 +20,11 @@ public class Stage {
 	final static int DRAW = 2;
 	
 	
+	static Scanner scanner = new Scanner(System.in);
+	
 	public static void gameStart(int id) {
+		StageView stageView = new StageView();
 
-		Scanner scanner = new Scanner(System.in);
 		Dao dao = new Dao();
 		final int GAME_END_NUMBER = 0;
 		final int GAME_START_NUMBER = 1; 
@@ -74,10 +77,10 @@ public class Stage {
 
 				// 승자 결정
 				String[] rsWinner = { "WIN!!", "LOSE", "DRAW" };
-				int rsInt = winner(input, comCase);
+				int rsInt = Winner(input, comCase);
 				System.out.println(rsWinner[rsInt]);
 				
-				// 승률 ++
+				// 승점 ++
 				if (rsInt == WIN) {
 					winScore++;
 				} else if(rsInt == DRAW) {
@@ -85,7 +88,7 @@ public class Stage {
 				} else {
 					drawScore++;
 				}
-				System.out.println("이긴 횟수 : " + winScore + ", 진 횟수 : " + loseScore + ", 비긴 횟수 : " + drawScore);
+				stageView.StageResult(winScore, loseScore, drawScore);
 
 				// 계속 할거임?
 				System.out.println("게임을 계속 하시겠습니까? 0.No 1.Yes");
@@ -97,7 +100,7 @@ public class Stage {
 		}
 	}
 
-	public static int winner(int user, int com) {
+	public static int Winner(int user, int com) {
 		if (user == com) 
 			return DRAW;
 		
