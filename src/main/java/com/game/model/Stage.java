@@ -9,6 +9,11 @@ import com.game.dao.Dao;
 
 
 public class Stage {
+	// 1.가위, 2.바위, 3.보
+	final static int SCISSORS = 1;
+	final static int ROCK = 2;
+	final static int PAPER = 3;
+	
 	public static void gameStart(int id) {
 
 		Scanner scanner = new Scanner(System.in);
@@ -53,9 +58,9 @@ public class Stage {
 
 				// 유저, 컴퓨터 입력값 변형
 				HashMap<Integer, String> hMap = new HashMap<>();
-				hMap.put(1, "가위");
-				hMap.put(2, "바위");
-				hMap.put(3, "보");
+				hMap.put(SCISSORS, "가위");
+				hMap.put(ROCK, "바위");
+				hMap.put(PAPER, "보");
 
 				// 선택 출력
 				System.out.println("유저의 선택 :: " + hMap.get(input));
@@ -88,22 +93,21 @@ public class Stage {
 	}
 
 	public static int winner(int user, int com) {
-		int answer = 0;
-
+		// return이 0은 이긴거, 1은 진거, 2는 비긴거 
 		if (user == com) 
 			return 2;
 		
-		if (user == 0 && com == 1) {
-			answer = 1;
+		if (user == SCISSORS && com == ROCK) {
+			return 1;
 
-		} else if (user == 1 && com == 2) {
-			answer = 1;
+		} else if (user == ROCK && com == PAPER) {
+			return 1;
 
-		} else if (user == 2 && com == 0) {
-			answer = 1;
+		} else if (user == PAPER && com == SCISSORS) {
+			return 1;
 
 		}
-		return answer;
+		return 0;
 	}
 
 }
