@@ -1,6 +1,11 @@
 package com.game.view;
 
 public class StageView {
+	public void stageStart() {
+		System.out.println("안내면 진거 가위바위보!");
+		System.out.println("입력하세요 : 1.가위, 2.바위, 3.보");
+	}
+	
 	public void ScoreResult(int winScore, int loseScore, int drawScore) {
 		System.out.println("이긴 횟수 : " + winScore + ", 진 횟수 : " + loseScore + ", 비긴 횟수 : " + drawScore);
 	}

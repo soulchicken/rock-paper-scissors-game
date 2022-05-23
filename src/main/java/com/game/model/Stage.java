@@ -55,8 +55,7 @@ public class Stage {
 								
 			} else if (cn == GAME_START_NUMBER) {
 				
-				System.out.println("안내면 진거 가위바위보!");
-				System.out.println("입력하세요 : 1.가위, 2.바위, 3.보");
+				stageView.stageStart();
 				
 				int input = scanner.nextInt();// 입력
 
