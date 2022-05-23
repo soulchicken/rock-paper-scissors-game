@@ -76,9 +76,8 @@ public class Stage {
 				
 
 				// 승자 결정
-				String[] rsWinner = { "WIN!!", "LOSE", "DRAW" };
 				int rsInt = Winner(input, comCase);
-				System.out.println(rsWinner[rsInt]);
+				stageView.StageResult(rsInt);
 				
 				// 승점 ++
 				if (rsInt == WIN) {
@@ -88,7 +87,7 @@ public class Stage {
 				} else {
 					drawScore++;
 				}
-				stageView.StageResult(winScore, loseScore, drawScore);
+				stageView.ScoreResult(winScore, loseScore, drawScore);
 
 				// 계속 할거임?
 				System.out.println("게임을 계속 하시겠습니까? 0.No 1.Yes");
