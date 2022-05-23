@@ -14,6 +14,11 @@ public class Stage {
 	final static int ROCK = 2;
 	final static int PAPER = 3;
 	
+	final static int WIN = 0;
+	final static int LOSE = 1;
+	final static int DRAW = 2;
+	
+	
 	public static void gameStart(int id) {
 
 		Scanner scanner = new Scanner(System.in);
@@ -73,9 +78,9 @@ public class Stage {
 				System.out.println(rsWinner[rsInt]);
 				
 				// 승률 ++
-				if (rsInt == 0) {
+				if (rsInt == WIN) {
 					winScore++;
-				} else if(rsInt == 1) {
+				} else if(rsInt == DRAW) {
 					loseScore++;
 				} else {
 					drawScore++;
@@ -93,21 +98,20 @@ public class Stage {
 	}
 
 	public static int winner(int user, int com) {
-		// return이 0은 이긴거, 1은 진거, 2는 비긴거 
 		if (user == com) 
-			return 2;
+			return DRAW;
 		
 		if (user == SCISSORS && com == ROCK) {
-			return 1;
+			return LOSE;
 
 		} else if (user == ROCK && com == PAPER) {
-			return 1;
+			return LOSE;
 
 		} else if (user == PAPER && com == SCISSORS) {
-			return 1;
+			return LOSE;
 
 		}
-		return 0;
+		return WIN;
 	}
 
 }
